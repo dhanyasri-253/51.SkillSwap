@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillSwap</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #20312d;
+      --muted: #61736d;
+      --line: #d5e0da;
+      --paper: #f5f7f2;
+      --white: #ffffff;
+      --green: #1c6b53;
+      --green-dark: #14513f;
+      --coral: #d5664e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    header {
+      padding: 26px max(22px, calc((100% - 1080px) / 2));
+      background: var(--green-dark);
+      color: var(--white);
+      border-bottom: 5px solid var(--coral);
+    }
+
+    header h1 { margin: 0; font-size: 30px; font-weight: 600; }
+
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 30px auto 56px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    section {
+      min-width: 0;
+      padding: 20px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--green);
+      border-radius: 5px;
+    }
+
+    h2 { margin: 0 0 16px; font-size: 22px; }
+
+    .fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    label { display: grid; gap: 5px; color: var(--muted); font: 13px Arial, sans-serif; }
+
+    input, select {
+      width: 100%;
+      min-width: 0;
+      height: 38px;
+      padding: 7px 9px;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      background: #fff;
+      color: var(--ink);
+      font: 14px Arial, sans-serif;
+    }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+
+    button {
+      min-height: 36px;
+      padding: 7px 13px;
+      border: 1px solid var(--green);
+      border-radius: 3px;
+      background: var(--green);
+      color: #fff;
+      cursor: pointer;
+      font: 14px Arial, sans-serif;
+    }
+
+    button:hover { background: var(--green-dark); }
+    button.secondary { background: #fff; color: var(--green-dark); }
+    button.secondary:hover { background: #edf4ef; }
+    button.danger { border-color: var(--coral); background: var(--coral); }
+
+    pre {
+      max-height: 240px;
+      overflow: auto;
+      margin: 15px 0 0;
+      padding: 12px;
+      background: #f1f5f1;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font: 12px/1.5 Consolas, monospace;
+    }
+
+    .message { min-height: 17px; margin: 10px 0 0; color: var(--muted); font: 13px Arial, sans-serif; }
+
+    @media (max-width: 700px) {
+      main { grid-template-columns: 1fr; margin-top: 18px; }
+      section { padding: 16px; }
+      header { padding: 20px 16px; }
+    }
+
+    @media (max-width: 420px) {
+      .fields { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header><h1>SkillSwap</h1></header>
+  <main>
+    <section data-module="members" data-id="memberId">
+      <h2>1. Member</h2>
+      <div class="fields">
+        <label>Member ID (for view, update, delete)<input data-field="id" type="number" min="1"></label>
+        <label>Name<input data-field="name" type="text"></label>
+        <label>Email<input data-field="email" type="email"></label>
+        <label>Phone<input data-field="phone" type="tel"></label>
+        <label>Password<input data-field="password" type="password"></label>
+      </div>
+      <div class="actions">
+        <button data-action="add">Add</button><button class="secondary" data-action="view">View</button>
+        <button class="secondary" data-action="update">Update</button><button class="danger" data-action="delete">Delete</button>
+      </div>
+      <p class="message" aria-live="polite"></p><pre hidden></pre>
+    </section>
+
+    <section data-module="skilloffers" data-id="skillOfferId">
+      <h2>2. Skill Offer</h2>
+      <div class="fields">
+        <label>Skill Offer ID (for view, update, delete)<input data-field="id" type="number" min="1"></label>
+        <label>Member ID<input data-field="memberId" type="number" min="1"></label>
+        <label>Skill Name<input data-field="skillName" type="text"></label>
+        <label>Description<input data-field="description" type="text"></label>
+        <label>Level<input data-field="level" type="text"></label>
+        <label>Credits Required<input data-field="creditsRequired" type="number" min="0"></label>
+      </div>
+      <div class="actions">
+        <button data-action="add">Add</button><button class="secondary" data-action="view">View</button>
+        <button class="secondary" data-action="update">Update</button><button class="danger" data-action="delete">Delete</button>
+      </div>
+      <p class="message" aria-live="polite"></p><pre hidden></pre>
+    </section>
+
+    <section data-module="sessionrequests" data-id="sessionRequestId">
+      <h2>3. Session Request</h2>
+      <div class="fields">
+        <label>Session Request ID (for view, update, delete)<input data-field="id" type="number" min="1"></label>
+        <label>Requester ID<input data-field="requesterId" type="number" min="1"></label>
+        <label>Skill Offer ID<input data-field="skillOfferId" type="number" min="1"></label>
+        <label>Request Date<input data-field="requestDate" type="date"></label>
+        <label>Status<select data-field="status"><option value="PENDING">PENDING</option><option value="ACCEPTED">ACCEPTED</option><option value="REJECTED">REJECTED</option><option value="COMPLETED">COMPLETED</option></select></label>
+        <label>Session Date<input data-field="sessionDate" type="date"></label>
+      </div>
+      <div class="actions">
+        <button data-action="add">Add</button><button class="secondary" data-action="view">View</button>
+        <button class="secondary" data-action="update">Update</button><button class="danger" data-action="delete">Delete</button>
+      </div>
+      <p class="message" aria-live="polite"></p><pre hidden></pre>
+    </section>
+
+    <section data-module="creditledger" data-id="creditLedgerId">
+      <h2>4. Credit Ledger</h2>
+      <div class="fields">
+        <label>Credit Ledger ID (for view, update, delete)<input data-field="id" type="number" min="1"></label>
+        <label>Member ID<input data-field="memberId" type="number" min="1"></label>
+        <label>Session Request ID<input data-field="sessionRequestId" type="number" min="1"></label>
+        <label>Transaction Type<select data-field="transactionType"><option value="EARN">EARN</option><option value="SPEND">SPEND</option></select></label>
+        <label>Credits<input data-field="credits" type="number" min="0"></label>
+        <label>Transaction Date<input data-field="transactionDate" type="datetime-local"></label>
+        <label>Description<input data-field="description" type="text"></label>
+      </div>
+      <div class="actions">
+        <button data-action="add">Add</button><button class="secondary" data-action="view">View</button>
+        <button class="secondary" data-action="update">Update</button><button class="danger" data-action="delete">Delete</button>
+      </div>
+      <p class="message" aria-live="polite"></p><pre hidden></pre>
+    </section>
+  </main>
+
+  <script>
+    const numberFields = new Set(["memberId", "requesterId", "skillOfferId", "sessionRequestId", "creditsRequired", "credits"]);
+
+    document.querySelectorAll("section[data-module]").forEach((section) => {
+      const baseUrl = `/${section.dataset.module}`;
+      const idInput = section.querySelector('[data-field="id"]');
+      const message = section.querySelector(".message");
+      const output = section.querySelector("pre");
+
+      function getId() {
+        if (!idInput.value) throw new Error("Enter a record ID first.");
+        return encodeURIComponent(idInput.value);
+      }
+
+      function getFormData() {
+        const data = {};
+        section.querySelectorAll("[data-field]").forEach((input) => {
+          const field = input.dataset.field;
+          if (field === "id" || input.value === "") return;
+          data[field] = numberFields.has(field) ? Number(input.value) : input.value;
+        });
+        return data;
+      }
+
+      async function request(method, url, body) {
+        const options = { method, headers: { "Content-Type": "application/json" } };
+        if (body !== undefined) options.body = JSON.stringify(body);
+        const response = await fetch(url, options);
+        const text = await response.text();
+        if (!response.ok) throw new Error(text || `Request failed (${response.status}).`);
+        return text ? JSON.parse(text) : "Deleted successfully.";
+      }
+
+      section.querySelectorAll("button[data-action]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          message.textContent = "";
+          try {
+            let result;
+            switch (button.dataset.action) {
+              case "add": result = await request("POST", baseUrl, getFormData()); break;
+              case "view": result = await request("GET", idInput.value ? `${baseUrl}/${getId()}` : baseUrl); break;
+              case "update": result = await request("PUT", `${baseUrl}/${getId()}`, getFormData()); break;
+              case "delete": result = await request("DELETE", `${baseUrl}/${getId()}`); break;
+            }
+            output.hidden = false;
+            output.textContent = typeof result === "string" ? result : JSON.stringify(result, null, 2);
+            message.textContent = "Request completed.";
+          } catch (error) {
+            message.textContent = error.message;
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

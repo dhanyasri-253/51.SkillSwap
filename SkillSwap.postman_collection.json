@@ -1,0 +1,49 @@
+{
+  "info": {
+    "name": "SkillSwap",
+    "description": "CRUD requests for the four SkillSwap modules.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Member",
+      "item": [
+        { "name": "Get all members", "request": { "method": "GET", "url": "http://localhost:8080/members" } },
+        { "name": "Get member by ID", "request": { "method": "GET", "url": "http://localhost:8080/members/1" } },
+        { "name": "Add member", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Aarav Mehta\",\n  \"email\": \"aarav.mehta@example.com\",\n  \"phone\": \"9876543210\",\n  \"password\": \"demoPassword123\"\n}", "options": { "raw": { "language": "json" } } }, "url": "http://localhost:8080/members" } },
+        { "name": "Update member", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Aarav Mehta\",\n  \"email\": \"aarav.updated@example.com\",\n  \"phone\": \"9876543211\",\n  \"password\": \"demoPassword123\"\n}", "options": { "raw": { "language": "json" } } }, "url": "http://localhost:8080/members/1" } },
+        { "name": "Delete member", "request": { "method": "DELETE", "url": "http://localhost:8080/members/1" } }
+      ]
+    },
+    {
+      "name": "SkillOffer",
+      "item": [
+        { "name": "Get all skill offers", "request": { "method": "GET", "url": "http://localhost:8080/skilloffers" } },
+        { "name": "Get skill offer by ID", "request": { "method": "GET", "url": "http://localhost:8080/skilloffers/1" } },
+        { "name": "Add skill offer", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"memberId\": 1,\n  \"skillName\": \"Guitar Basics\",\n  \"description\": \"Beginner guitar lessons\",\n  \"level\": \"Beginner\",\n  \"creditsRequired\": 3\n}", "options": { "raw": { "language": "json" } } }, "url": "http://localhost:8080/skilloffers" } },
+        { "name": "Update skill offer", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"memberId\": 1,\n  \"skillName\": \"Guitar Basics\",\n  \"description\": \"Three beginner guitar sessions\",\n  \"level\": \"Beginner\",\n  \"creditsRequired\": 4\n}", "options": { "raw": { "language": "json" } } }, "url": "http://localhost:8080/skilloffers/1" } },
+        { "name": "Delete skill offer", "request": { "method": "DELETE", "url": "http://localhost:8080/skilloffers/1" } }
+      ]
+    },
+    {
+      "name": "SessionRequest",
+      "item": [
+        { "name": "Get all session requests", "request": { "method": "GET", "url": "http://localhost:8080/sessionrequests" } },
+        { "name": "Get session request by ID", "request": { "method": "GET", "url": "http://localhost:8080/sessionrequests/1" } },
+        { "name": "Add session request", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"requesterId\": 2,\n  \"skillOfferId\": 1,\n  \"requestDate\": \"2026-10-01\",\n  \"status\": \"PENDING\",\n  \"sessionDate\": \"2026-10-05\"\n}", "options": { "raw": { "language": "json" } } }, "url": "http://localhost:8080/sessionrequests" } },
+        { "name": "Update session request", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"requesterId\": 2,\n  \"skillOfferId\": 1,\n  \"requestDate\": \"2026-10-01\",\n  \"status\": \"ACCEPTED\",\n  \"sessionDate\": \"2026-10-06\"\n}", "options": { "raw": { "language": "json" } } }, "url": "http://localhost:8080/sessionrequests/1" } },
+        { "name": "Delete session request", "request": { "method": "DELETE", "url": "http://localhost:8080/sessionrequests/1" } }
+      ]
+    },
+    {
+      "name": "CreditLedger",
+      "item": [
+        { "name": "Get all credit transactions", "request": { "method": "GET", "url": "http://localhost:8080/creditledger" } },
+        { "name": "Get credit transaction by ID", "request": { "method": "GET", "url": "http://localhost:8080/creditledger/1" } },
+        { "name": "Add credit transaction", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"memberId\": 1,\n  \"sessionRequestId\": 1,\n  \"transactionType\": \"EARN\",\n  \"credits\": 3,\n  \"transactionDate\": \"2026-10-06T16:30:00\",\n  \"description\": \"Completed guitar lesson\"\n}", "options": { "raw": { "language": "json" } } }, "url": "http://localhost:8080/creditledger" } },
+        { "name": "Update credit transaction", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"memberId\": 1,\n  \"sessionRequestId\": 1,\n  \"transactionType\": \"SPEND\",\n  \"credits\": 2,\n  \"transactionDate\": \"2026-10-06T16:30:00\",\n  \"description\": \"Updated lesson credit record\"\n}", "options": { "raw": { "language": "json" } } }, "url": "http://localhost:8080/creditledger/1" } },
+        { "name": "Delete credit transaction", "request": { "method": "DELETE", "url": "http://localhost:8080/creditledger/1" } }
+      ]
+    }
+  ]
+}
